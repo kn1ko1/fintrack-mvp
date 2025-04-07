@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react"; // ✅ Line 2
+import React, { useEffect, useState } from "react";
+import PredictorForm from "../components/PredictorForm";
 
 type DashboardData = {
   debt: number;
@@ -17,7 +18,7 @@ const Dashboard: React.FC = () => {
       .catch((err) => console.error("Failed to fetch dashboard data", err));
   }, []);
 
-  if (!data) return <p>Loading...</p>; // ✅ Line 16
+  if (!data) return <p>Loading...</p>;
 
   return (
     <div style={{ padding: "2rem" }}>
@@ -28,8 +29,10 @@ const Dashboard: React.FC = () => {
         <li><strong>Monthly Expenses:</strong> £{data.expenses}</li>
         <li><strong>Investments:</strong> £{data.investments}</li>
       </ul>
+
+      <PredictorForm /> {/* 👈 This renders the credit score form */}
     </div>
   );
 };
 
-export default Dashboard; // ✅ Line 17
+export default Dashboard;
