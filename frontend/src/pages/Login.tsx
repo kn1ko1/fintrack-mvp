@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./AuthForm.css";
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,13 +22,13 @@ const Login: React.FC = () => {
       localStorage.setItem("token", token);
       setSuccess("Login successful!");
       setError(null);
-      // 🔜 Redirect to dashboard later
+      navigate("/dashboard"); // ✅ Only happens on successful login
     } catch (err: any) {
       setError("Invalid credentials. Please try again.");
       setSuccess(null);
     }
   };
-
+  
   return (
     <div className="auth-container">
       <h2 className="auth-title">Welcome Back</h2>

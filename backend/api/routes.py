@@ -1,3 +1,4 @@
+from flask import current_app
 from flask import Blueprint, request, jsonify
 from ai.predictor import predict_credit_score
 
@@ -28,6 +29,8 @@ def predict():
         debt = float(data["debt"])
 
         predicted_score = predict_credit_score(score, income, expenses, debt)
+
+        users_db = current_app.config["USERS_DB"]
 
         return jsonify({
             "predicted_score": predicted_score,
