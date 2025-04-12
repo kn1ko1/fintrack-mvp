@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PredictorForm from "../components/PredictorForm";
 import { useNavigate } from "react-router-dom";
 import { trace } from "console";
+import EntryManager from "../components/EntryManager";
 
 
 type DashboardData = {
@@ -59,10 +60,12 @@ const Dashboard: React.FC = () => {
       <section style={styles.form}>
         <PredictorForm />
       </section>
+
+      <EntryManager />
     </div>
   );
-  
 };
+
 
 const styles = {
   page: {
