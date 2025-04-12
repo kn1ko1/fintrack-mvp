@@ -31,40 +31,74 @@ const Dashboard: React.FC = () => {
   if (!data) return <p>Loading...</p>;
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Finance Overview</h1>
-      <ul>
-        <li><strong>Total Debt:</strong> £{data.debt}</li>
-        <li><strong>Monthly Income:</strong> £{data.income}</li>
-        <li><strong>Monthly Expenses:</strong> £{data.expenses}</li>
-        <li><strong>Investments:</strong> £{data.investments}</li>
-      </ul>
-
-      <PredictorForm /> {/* 👈 This renders the credit score form */}
-      <button onClick={handleLogout} style={styles.button}>Logout</button>
+    <div style={styles.page}>
+      <header style={styles.header}>
+        <h1>📊 Finance Overview</h1>
+        <button onClick={handleLogout} style={styles.logout}>Logout</button>
+      </header>
+  
+      <section style={styles.grid}>
+        <div style={styles.card}>
+          <h3>Total Debt</h3>
+          <p>£{data.debt.toLocaleString()}</p>
+        </div>
+        <div style={styles.card}>
+          <h3>Monthly Income</h3>
+          <p>£{data.income.toLocaleString()}</p>
+        </div>
+        <div style={styles.card}>
+          <h3>Monthly Expenses</h3>
+          <p>£{data.expenses.toLocaleString()}</p>
+        </div>
+        <div style={styles.card}>
+          <h3>Investments</h3>
+          <p>£{data.investments.toLocaleString()}</p>
+        </div>
+      </section>
+  
+      <section style={styles.form}>
+        <PredictorForm />
+      </section>
     </div>
   );
+  
 };
 
 const styles = {
-  container: {
-    padding: "3rem",
-    textAlign: "left" as const,
+  page: {
+    padding: "2rem",
+    fontFamily: "'Segoe UI', sans-serif",
   },
-  button: {
-    marginTop: "2rem",
-    padding: "12px 24px",
-    fontSize: "16px",
-    backgroundColor: "var(--accent)",
-    color: "#fff",
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "2rem",
+  },
+  logout: {
+    padding: "10px 20px",
+    backgroundColor: "#ff5400",
     border: "none",
-    borderRadius: "8px",
+    borderRadius: "6px",
+    color: "white",
+    fontWeight: "bold",
     cursor: "pointer",
-    transition: "background-color 0.3s ease",
-    "&:hover": {
-      backgroundColor: "var(--accent-hover)",
-    }
   },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+    gap: "1.5rem",
+    marginBottom: "2rem",
+  },
+  card: {
+    backgroundColor: "#f8f9fa",
+    padding: "1.5rem",
+    borderRadius: "10px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
+  },
+  form: {
+    marginTop: "2rem",
+  }
 };
 
 export default Dashboard;
